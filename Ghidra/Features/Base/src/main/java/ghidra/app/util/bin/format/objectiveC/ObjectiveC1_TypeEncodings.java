@@ -410,6 +410,11 @@ public final class ObjectiveC1_TypeEncodings {
 				DataType dt = parseDataType(buffer);
 				return new TypedefDataType("ONEWAY " + dt.getDisplayName(), dt);
 			}
+			case 'A': {
+				buffer.deleteCharAt(0);
+				DataType dt = parseDataType(buffer);
+				return new TypedefDataType("ATOMIC " + dt.getDisplayName(), dt);
+			}
 		}
 		throw new UnsupportedOperationException("unrecognized format type: " + buffer.charAt(0));
 	}
