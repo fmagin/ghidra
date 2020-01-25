@@ -385,15 +385,45 @@ static Map<String, List<String>> parseLaunchProperties(File launchPropertiesFile
 	return map;
 }
 
-
-task runGhidraDev(type: JavaExec) {
-	dependsOn classes
+apply from: "$rootProject.projectDir/gradle/javaProject.gradle"
+task runGUI(type: JavaExec) {
+	dependsOn prepDev
 	File propertiesFile = new File('./Ghidra/RuntimeScripts/Common/support/launch.properties')
 	Map<String, List<String>> props = parseLaunchProperties(propertiesFile)
+	classpath = files("./Ghidra/Framework/Utility/")
+	jvmArgs = ["-Xbootclasspath/a:./Ghidra/Framework/Utility/build/classes/java/main/","-DbinaryPath=build/classes/java/main:build/resources/main/:bin/default/:src/main/resources/:bin/default/"]
+	jvmArgs += props['VMARGS']
+
+	if (org.gradle.internal.os.OperatingSystem.current().isLinux()){
+		jvmArgs += props['VMARGS_LINUX']
+	}
+	else if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()){
+		jvmArgs += props['VMARGS_MACOS']
+	}
+	else if (org.gradle.internal.os.OperatingSystem.current().isWindows()){
+		jvmArgs += props['VMARGS_WINDOWS']
+	}
+	main = "ghidra.GhidraLauncher"
+	args = ["ghidra.GhidraRun"]
+}
+
+task runHeadless(type: JavaExec) {
+	dependsOn prepDev
+	File propertiesFile = new File('./Ghidra/RuntimeScripts/Common/support/launch.properties')
+	Map<String, List<String>> props = parseLaunchProperties(propertiesFile)
+	classpath = files("./Ghidra/Framework/Utility/")
 	jvmArgs = ["-Xbootclasspath/a:./Ghidra/Framework/Utility/build/classes/java/main/","-DbinaryPath=build/classes/java/main:build/resources/main/:bin/default/:src/main/resources/:bin/default/"]
 	jvmArgs += props['VMARGS']
 	jvmArgs += props['VMARGS_LINUX']
+	if (org.gradle.internal.os.OperatingSystem.current().isLinux()){
+		jvmArgs += props['VMARGS_LINUX']
+	}
+	else if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()){
+		jvmArgs += props['VMARGS_MACOS']
+	}
+	else if (org.gradle.internal.os.OperatingSystem.current().isWindows()){
+		jvmArgs += props['VMARGS_WINDOWS']
+	}
 	main = "ghidra.GhidraLauncher"
-	args = ["ghidra.GhidraRun"]
-	classpath = files("./Ghidra/Framework/Utility/")
+	args = ["ghidra.app.util.headless.AnalyzeHeadless"]
 }
