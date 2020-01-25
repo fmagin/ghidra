@@ -348,3 +348,51 @@ String generateLibraryDependencyMapping() {
 
 task allSleighCompile {
 }
+
+apply plugin: 'java'
+
+static Map<String, List<String>> parseLaunchProperties(File launchPropertiesFile) throws FileNotFoundException, IOException {
+	HashMap<String, List<String>> map = new HashMap<>();
+	if (launchPropertiesFile != null)
+	{
+		BufferedReader reader = new BufferedReader(new FileReader(launchPropertiesFile))
+		int i = 0;
+		String line;
+		while ((line = reader.readLine()) != null) {
+			i++;
+			line = line.trim();
+			if (line.isEmpty() || line.startsWith("#") || line.startsWith("//")) {
+				continue;
+			}
+			int equalsIndex = line.indexOf('=');
+//				if (equalsIndex <= 0) {
+//					throw new ParseException(
+//							"Error parsing line " + i + " of " + launchPropertiesFile, i);
+//				}
+			String key = line.substring(0, equalsIndex).trim();
+			String value = line.substring(equalsIndex + 1, line.length()).trim();
+			List<String> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<>();
+				map.put(key, valueList);
+			}
+			if (!value.isEmpty()) {
+				valueList.add(value);
+			}
+		}
+	}
+	return map;
+}
+
+
+task runGhidraDev(type: JavaExec) {
+	dependsOn classes
+	File propertiesFile = new File('./Ghidra/RuntimeScripts/Common/support/launch.properties')
+	Map<String, List<String>> props = parseLaunchProperties(propertiesFile)
+	jvmArgs = ["-Xbootclasspath/a:./Ghidra/Framework/Utility/build/classes/java/main/","-DbinaryPath=build/classes/java/main:build/resources/main/:bin/default/:src/main/resources/:bin/default/"]
+	jvmArgs += props['VMARGS']
+	jvmArgs += props['VMARGS_LINUX']
+	main = "ghidra.GhidraLauncher"
+	args = ["ghidra.GhidraRun"]
+	classpath = files("./Ghidra/Framework/Utility/")
+}
