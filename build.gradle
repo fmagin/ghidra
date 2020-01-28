@@ -387,7 +387,7 @@ static Map<String, List<String>> parseLaunchProperties(File launchPropertiesFile
 
 apply from: "$rootProject.projectDir/gradle/javaProject.gradle"
 task runGUI(type: JavaExec) {
-	dependsOn prepDev
+	//dependsOn prepDev
 	File propertiesFile = new File('./Ghidra/RuntimeScripts/Common/support/launch.properties')
 	Map<String, List<String>> props = parseLaunchProperties(propertiesFile)
 	classpath = files("./Ghidra/Framework/Utility/")
