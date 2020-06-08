@@ -150,7 +150,7 @@ public class ClangToken implements ClangNode {
 		return text;
 	}
 
-	void setText(String text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 

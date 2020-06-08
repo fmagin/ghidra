@@ -1,6 +1,8 @@
 package ghidra.app.decompiler;
 
-public abstract class ClangASTTransformation {
-    abstract DecompileResults transform(DecompileResults input);
+import ghidra.util.classfinder.ExtensionPoint;
+
+public abstract class ClangASTTransformation implements ExtensionPoint {
+    public abstract DecompileResults transform(DecompileResults input);
 
 }
