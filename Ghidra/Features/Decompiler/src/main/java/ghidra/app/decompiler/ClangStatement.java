@@ -41,6 +41,14 @@ public class ClangStatement extends ClangTokenGroup {
 	private PcodeOp op;		// Root op of C-statement
 
 	public ClangStatement(ClangNode par) { super(par); op = null; }
+
+	public ClangStatement(ClangNode newParent, PcodeOp pcodeOp) {
+		super(newParent);
+		op = pcodeOp;
+
+
+	}
+
 	public PcodeOp getPcodeOp() { return op; }
 	@Override
     public void restoreFromXML(XmlPullParser parser,PcodeFactory pfactory) {

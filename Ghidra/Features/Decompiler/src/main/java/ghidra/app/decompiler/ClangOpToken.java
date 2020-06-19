@@ -27,6 +27,8 @@ import ghidra.program.model.pcode.*;
 import ghidra.util.xml.*;
 import ghidra.xml.*;
 
+import java.awt.*;
+
 /**
  * 
  *
@@ -40,6 +42,11 @@ public class ClangOpToken extends ClangToken {
 	public ClangOpToken(ClangNode par) {
 		super(par);
 		op = null;
+	}
+
+	public ClangOpToken(ClangNode par, String txt, Color highlight, int syntax_type, PcodeOp op) {
+		super(par, txt, highlight, syntax_type);
+		this.op = op;
 	}
 	
 	@Override

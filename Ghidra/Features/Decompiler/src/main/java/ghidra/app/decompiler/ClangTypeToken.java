@@ -38,6 +38,11 @@ public class ClangTypeToken extends ClangToken {
 		super(par);
 		datatype = null;
 	}
+
+	public ClangTypeToken(ClangNode par, DataType dtype) {
+		super(par);
+		datatype = dtype;
+	}
 	
 	@Override
     public boolean isVariableRef() {

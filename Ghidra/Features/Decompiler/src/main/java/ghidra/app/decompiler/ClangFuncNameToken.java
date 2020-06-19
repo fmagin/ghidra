@@ -42,6 +42,13 @@ public class ClangFuncNameToken extends ClangToken {
 		hfunc = hf;
 		op = null;
 	}
+
+	public ClangFuncNameToken(ClangNode par, HighFunction hf, PcodeOp pcodeOp) {
+		super(par);
+		hfunc = hf;
+		op = pcodeOp;
+	}
+
 	public HighFunction getHighFunction() { return hfunc; }
 	
 	@Override

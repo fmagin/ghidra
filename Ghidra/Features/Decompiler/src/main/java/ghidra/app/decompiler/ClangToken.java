@@ -76,6 +76,13 @@ public class ClangToken implements ClangNode {
 		syntax_type = getColor(col);
 	}
 
+	public ClangToken(ClangNode par, String txt, Color highlight, int syntax_type) {
+		parent = par;
+		text = txt;
+		this.highlight = highlight;
+		this.syntax_type = syntax_type;
+	}
+
 	@Override
 	public ClangNode Parent() {
 		return parent;

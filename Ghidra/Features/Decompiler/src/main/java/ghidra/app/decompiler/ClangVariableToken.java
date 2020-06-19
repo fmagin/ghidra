@@ -26,6 +26,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.pcode.*;
 import ghidra.util.xml.*;
 import ghidra.xml.*;
+
+import java.awt.Color;
+
 /**
  * 
  *
@@ -39,6 +42,12 @@ public class ClangVariableToken extends ClangToken {
 		super(par);
 		varnode = null;
 		op = null;
+	}
+
+	public ClangVariableToken(ClangNode par, String txt, Color highlight, int syntax_type, Varnode vnode, PcodeOp op) {
+		super(par, txt, highlight, syntax_type);
+		varnode = vnode;
+		this.op = op;
 	}
 	
 	@Override
