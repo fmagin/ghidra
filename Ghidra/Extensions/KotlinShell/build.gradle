@@ -1,0 +1,29 @@
+//apply from: "$rootProject.projectDir/gradle/distributableGhidraExtension.gradle"
+apply from: "$rootProject.projectDir/gradle/javaProject.gradle"
+//apply from: "$rootProject.projectDir/gradle/javaTestProject.gradle"
+//apply from: "$rootProject.projectDir/gradle/helpProject.gradle"
+apply plugin: 'eclipse'
+eclipse.project.name = 'Xtra KotlinREPL'
+
+
+version 'unspecified'
+
+repositories {
+    flatDir {
+        dirs 'lib'
+    }
+
+}
+
+task helpIndexClasses{}
+
+dependencies {
+    compile project(':Base')
+    compile ":annotations:13.0"
+    runtime ":jupyter-lib:0.8.2.61"
+    compile ":kotlin-jupyter-kernel:0.8.2.61"
+    compile ":kotlin-reflect:1.4.20-dev-2342"
+    compile ":kotlin-script-runtime:1.4.20-dev-2342"
+    compile ":kotlin-stdlib:1.4.20-dev-2342"
+    compile ":kotlin-stdlib-common:1.4.20-dev-2342"
+}
