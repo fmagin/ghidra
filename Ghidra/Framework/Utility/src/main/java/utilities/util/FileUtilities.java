@@ -855,7 +855,7 @@ public final class FileUtilities {
 	public static boolean isPathContainedWithin(File potentialParentFile, File otherFile) {
 		try {
 			String parentPath = potentialParentFile.getCanonicalPath().replace('\\', '/');
-			String otherPath = otherFile.getCanonicalPath().replace('\\', '/');
+			String otherPath = otherFile.getAbsolutePath().replace('\\', '/');
 			if (parentPath.equals(otherPath)) {
 				return true;
 			}
