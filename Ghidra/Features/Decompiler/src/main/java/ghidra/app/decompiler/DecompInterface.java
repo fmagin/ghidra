@@ -22,19 +22,15 @@
 package ghidra.app.decompiler;
 
 import java.io.*;
-import java.util.List;
 
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.framework.plugintool.mgr.ServiceManager;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.pcode.*;
-import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.CancelledException;
 import ghidra.util.task.CancelledListener;
 import ghidra.util.task.TaskMonitor;
 import ghidra.xml.XmlPullParser;
@@ -746,28 +742,8 @@ public class DecompInterface {
 		if (res != null) {
 			stream = res.getInputStream();
 		}
-
-		var orig = new DecompileResults(func, pcodelanguage, compilerSpec, dtmanage, decompileMessage,
+		return new DecompileResults(func, pcodelanguage, compilerSpec, dtmanage, decompileMessage,
 			stream, processState);
-		List<Class<? extends ClangASTTransformation>> transformers = ClassSearcher.getClasses(ClangASTTransformation.class);
-		DecompileResults result = orig;
-		for (Class<? extends ClangASTTransformation> t: transformers) {
-			try {
-				ClangASTTransformation transformer = t.newInstance();
-				result = transformer.transform(result);
-			}
-			catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
-		}
-
-		return orig;
-
 	}
 
 	/**
