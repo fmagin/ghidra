@@ -173,7 +173,13 @@ public class DecompilerManager {
 			TaskMonitor monitor) throws DecompileException {
 
 		final var results = decompiler.decompile(program, functionToDecompile, debugFile, monitor);
-		return this.decompilerController.getTransformer().transform(results);
+		final var transformer = this.decompilerController.getTransformer();
+		if (transformer != null){
+			return transformer.transform(results);
+		}
+		else {
+			return results;
+		}
 
 	}
 
