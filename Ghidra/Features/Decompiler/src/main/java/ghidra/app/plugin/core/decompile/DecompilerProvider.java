@@ -999,7 +999,9 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 	}
 
 	private void transformationServiceAdded(){
-		controller.setTransformer(tool.getService(DecompilerTransformer.class));
+		var service = tool.getService(DecompilerTransformer.class);
+		controller.setTransformer(service);
+		addLocalAction(service.getGraphDisplayAction());
 	}
 
 	private void graphServiceAdded() {

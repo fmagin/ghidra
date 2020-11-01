@@ -67,7 +67,7 @@ public class DecompilerActionContext extends NavigatableActionContext
 	public ClangToken getTokenAtCursor() {
 		if (!tokenIsInitialized) {
 			tokenAtCursor = getDecompilerPanel().getTokenAtCursor();
-			tokenIsInitialized = true;
+			tokenIsInitialized = tokenAtCursor != null;
 		}
 		return tokenAtCursor;
 	}
