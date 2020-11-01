@@ -39,8 +39,8 @@ public class ClangTypeToken extends ClangToken {
 		datatype = null;
 	}
 
-	public ClangTypeToken(ClangNode par, DataType dtype) {
-		super(par);
+	public ClangTypeToken(ClangNode par, DataType dtype, String txt) {
+		super(par, txt);
 		datatype = dtype;
 	}
 	

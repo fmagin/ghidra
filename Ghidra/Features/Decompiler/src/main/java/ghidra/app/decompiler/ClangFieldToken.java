@@ -34,8 +34,8 @@ public class ClangFieldToken extends ClangToken {
 		datatype = null;
 	}
 
-	public ClangFieldToken(ClangNode par, DataType dtype, int offset) {
-		super(par);
+	public ClangFieldToken(ClangNode par, DataType dtype, int offset, String text) {
+		super(par, text);
 		datatype = dtype;
 		this.offset = offset;
 

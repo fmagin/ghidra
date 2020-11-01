@@ -88,6 +88,11 @@ public class ClangToken implements ClangNode {
 		return parent;
 	}
 
+	// Make it play nice with Kotlin property magic
+	public ClangNode getParent(){
+		return parent;
+	}
+
 	public ClangLine getLineParent() {
 		return lineparent;
 	}
@@ -149,7 +154,7 @@ public class ClangToken implements ClangNode {
 		return syntax_type;
 	}
 
-	void setSyntaxType(int syntax_type) {
+	public void setSyntaxType(int syntax_type) {
 		this.syntax_type = syntax_type;
 	}
 

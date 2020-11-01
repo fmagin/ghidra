@@ -69,6 +69,11 @@ public class ClangTokenGroup implements ClangNode {
 	}
 	
 	public ClangNode Parent() { return parent; }
+
+	// Make it play nice with Kotlin property magic
+	public ClangNode getParent(){
+		return this.Parent();
+	}
 	public int numChildren() { return tokgroup.size(); }
 	public ClangNode Child(int i) { return tokgroup.get(i); }
 	public ClangFunction getClangFunction() { return parent.getClangFunction(); }
