@@ -76,8 +76,20 @@ public class ClangToken implements ClangNode {
 		syntax_type = getColor(col);
 	}
 
+	public ClangToken(ClangNode par, String txt, Color highlight, int syntax_type) {
+		parent = par;
+		text = txt;
+		this.highlight = highlight;
+		this.syntax_type = syntax_type;
+	}
+
 	@Override
 	public ClangNode Parent() {
+		return parent;
+	}
+
+	// Make it play nice with Kotlin property magic
+	public ClangNode getParent(){
 		return parent;
 	}
 
@@ -142,7 +154,7 @@ public class ClangToken implements ClangNode {
 		return syntax_type;
 	}
 
-	void setSyntaxType(int syntax_type) {
+	public void setSyntaxType(int syntax_type) {
 		this.syntax_type = syntax_type;
 	}
 
@@ -150,7 +162,7 @@ public class ClangToken implements ClangNode {
 		return text;
 	}
 
-	void setText(String text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 

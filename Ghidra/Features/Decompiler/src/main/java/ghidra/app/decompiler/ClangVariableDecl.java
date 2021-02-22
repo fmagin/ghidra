@@ -45,6 +45,12 @@ public class ClangVariableDecl extends ClangTokenGroup {
 		typevar = null;
 	}
 
+	public ClangVariableDecl(ClangNode par, DataType dtype, HighVariable tvar) {
+		super(par);
+		datatype = dtype;
+		typevar = tvar;
+	}
+
 	public DataType getDataType() {
 		return datatype;
 	}

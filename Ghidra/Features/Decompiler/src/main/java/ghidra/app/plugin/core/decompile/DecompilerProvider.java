@@ -130,12 +130,18 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 			if (interfaceClass.equals(GraphDisplayBroker.class)) {
 				graphServiceRemoved();
 			}
+			else if (interfaceClass.equals(DecompilerTransformer.class)) {
+				transformationServiceRemoved();
+			}
 		}
 
 		@Override
 		public void serviceAdded(Class<?> interfaceClass, Object service) {
 			if (interfaceClass.equals(GraphDisplayBroker.class)) {
 				graphServiceAdded();
+			}
+			else if (interfaceClass.equals(DecompilerTransformer.class)) {
+				transformationServiceAdded();
 			}
 		}
 	};
@@ -986,6 +992,15 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 			graphASTControlFlowAction.dispose();
 			graphASTControlFlowAction = null;
 		}
+	}
+
+	private void transformationServiceRemoved(){
+		controller.setTransformer(tool.getService(DecompilerTransformer.class));
+	}
+
+	private void transformationServiceAdded(){
+		var service = tool.getService(DecompilerTransformer.class);
+		controller.setTransformer(service);
 	}
 
 	private void graphServiceAdded() {

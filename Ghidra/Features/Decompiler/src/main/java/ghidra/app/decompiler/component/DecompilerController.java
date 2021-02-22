@@ -24,6 +24,8 @@ import com.google.common.cache.CacheBuilder;
 import docking.widgets.fieldpanel.support.ViewerPosition;
 import ghidra.app.decompiler.*;
 import ghidra.app.plugin.core.decompile.DecompilerClipboardProvider;
+import ghidra.app.plugin.core.decompile.DecompilerProvider;
+import ghidra.app.plugin.core.decompile.DecompilerTransformer;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.HighFunction;
@@ -37,6 +39,7 @@ import utility.function.Callback;
  */
 
 public class DecompilerController {
+	private DecompilerTransformer transformer;
 	private DecompilerPanel decompilerPanel;
 	private DecompilerManager decompilerMgr;
 	private final DecompilerCallbackHandler callbackHandler;
@@ -55,7 +58,7 @@ public class DecompilerController {
 			new DecompilerPanel(this, options, clipboard, decompilerMgr.getTaskMonitorComponent());
 
 		decompilerPanel.setHoverMode(true);
-
+		this.transformer = null;
 	}
 
 	public DecompilerPanel getDecompilerPanel() {
@@ -319,5 +322,13 @@ public class DecompilerController {
 				decompilerCache.invalidate(function);
 			}
 		}
+	}
+
+	public DecompilerTransformer getTransformer() {
+		return transformer;
+	}
+
+	public void setTransformer(DecompilerTransformer transformer) {
+		this.transformer = transformer;
 	}
 }
