@@ -46,6 +46,12 @@ public class ClangSyntaxToken extends ClangToken {
 		super(par,txt,col);
 		open = close = -1;
 	}
+
+	public ClangSyntaxToken(ClangSyntaxToken base, ClangNode newParent){
+		super(newParent,base.getText(),base.getHighlight(), base.getSyntaxType());
+		open = base.open;
+		close = base.close;
+	}
 	
 	@Override
     public boolean isVariableRef() {

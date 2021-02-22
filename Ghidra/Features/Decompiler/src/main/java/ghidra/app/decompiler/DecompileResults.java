@@ -78,6 +78,17 @@ public class DecompileResults {
 		parseRawString(raw);
 	}
 
+	public DecompileResults(DecompileResults baseResults, ClangTokenGroup newDocRoot) {
+		function = baseResults.function;
+		this.language = baseResults.language;
+		this.compilerSpec = baseResults.compilerSpec;
+		dtmanage = baseResults.dtmanage;
+		errMsg = baseResults.errMsg;
+		hfunc = baseResults.hfunc;
+		hparamid = baseResults.hparamid;
+		this.docroot = newDocRoot;
+	}
+
 //	private void dumpResults(String raw) {
 //		if (raw == null) {
 //			return;

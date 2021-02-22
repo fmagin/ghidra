@@ -33,7 +33,10 @@ public class ClangBreak extends ClangToken {
 		super(par);
 		this.indent = indent;
 	}
-	
+	public ClangBreak(ClangNode par,int indent, String text) {
+		super(par, text);
+		this.indent = indent;
+	}
 	public int getIndent() { return indent; }
 	
 	@Override

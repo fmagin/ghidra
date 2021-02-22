@@ -42,6 +42,11 @@ public class ClangCommentToken extends ClangToken {
 		srcaddr = null;
 	}
 
+	public ClangCommentToken(ClangNode par, Address src) {
+		super(par);
+		srcaddr = src;
+	}
+
 	@Override
 	public boolean isVariableRef() {
 		return false;

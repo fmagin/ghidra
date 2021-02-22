@@ -42,6 +42,12 @@ public class ClangReturnType extends ClangTokenGroup {
 		varnode = null;
 		datatype = null;
 	}
+
+	public ClangReturnType(ClangNode par, Varnode vnode, DataType dtype) {
+		super(par);
+		this.varnode = vnode;
+		this.datatype = dtype;
+	}
 	
 	public DataType getDataType() { return datatype; }
 	public Varnode getVarnode() { return varnode; }
