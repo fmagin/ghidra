@@ -28,6 +28,11 @@ public class ClangLabelToken extends ClangToken {
 		super(par);
 		blockaddr = null;
 	}
+
+	public ClangLabelToken(ClangNode par, Address blockaddr, String text) {
+		super(par, text);
+		this.blockaddr = blockaddr;
+	}
 	
 	@Override
     public boolean isVariableRef() { return false; }

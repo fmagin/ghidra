@@ -77,6 +77,11 @@ public class ClangTokenGroup implements ClangNode, Iterable<ClangNode> {
 		return parent;
 	}
 
+	// Make it play nice with Kotlin property magic
+	public ClangNode getParent(){
+		return this.Parent();
+	}
+
 	@Override
 	public int numChildren() {
 		return tokgroup.size();
